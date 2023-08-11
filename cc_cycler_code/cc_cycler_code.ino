@@ -36,7 +36,7 @@
 //#define FAILURE_ALLOWANCE 5 // Number of times coupler can fail to holster
                             // before program halts
 
-#define CARRIAGE_SPEED 75       // 0-100% (please see TMCL code to adjust maximum)
+#define CARRIAGE_SPEED 10       // 0-100% (please see TMCL code to adjust maximum)
 //#define CARRIAGE_TIMEOUT 1500   // How long to allow carriage to run before stopping it (ms)
 //#define CARRIAGE_OUT_TIME 800   // Time to allow carriage to pull out
 
@@ -137,7 +137,7 @@ void loop()
   // Move towards engagement position and wait until it gets there
   
   Serial.println("Moving towards Credit Card slot");
-  driveMotor(CARRIAGE_SPEED);
+  driveMotor(-CARRIAGE_SPEED);
   lc_val = analogRead(lc_pin);
 
   while (lc_val < setpoint){  //loop until CC applies x lbs to the load cell 
@@ -163,7 +163,7 @@ void loop()
   
   while(digitalRead(SWITCH_PIN) == HIGH && engagement == true) // limit switch should be wired 'normally closed'; reverse motor until switch is activated (goes Low)
   {
-    driveMotor(-1*CARRIAGE_SPEED); 
+    driveMotor(CARRIAGE_SPEED); 
   }
 
   
